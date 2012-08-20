@@ -12,7 +12,7 @@ class TinySegmenter
       "[ぁ-ん]" => "I", # hiragana
       "[ァ-ヴーｱ-ﾝﾞｰ]" => "K", # katakana
       "[a-zA-Zａ-ｚＡ-Ｚ]" => "A", # ascii / romaji letters
-      "[0-9０-９]" => "N", # ascii / romaji letters
+      "[0-9０-９]" => "N", # ascii / romaji numbers
     }.each do |pattern, value|
       @chartype << [Regexp.compile(pattern), value]
     end
