@@ -17,7 +17,7 @@ describe TinySegmenter do
     subject.segment("TinySegmenterはRubyだけで").should == ["TinySegmenter", "は", "Ruby", "だけ", "で"]
   end
 
-  it "should have a version" do
+  it "has a version" do
     TinySegmenter::VERSION.should_not be_empty
   end
 end
