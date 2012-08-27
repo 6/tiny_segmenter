@@ -1,5 +1,7 @@
 Ruby port of [TinySegmenter.js](http://chasen.org/~taku/software/TinySegmenter/) for tokenizing Japanese text. Ruby 1.9 or higher required.
 
+[![Build Status](https://secure.travis-ci.org/6/tiny_segmenter.png?branch=master)](http://travis-ci.org/6/tiny_segmenter)
+
 ### Install
 
 `gem install tiny_segmenter` or add `tiny_segmenter` to your `Gemfile`
