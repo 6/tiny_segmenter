@@ -1,4 +1,5 @@
 #encoding: utf-8
+require "tiny_segmenter/version"
 
 class TinySegmenter
   def initialize

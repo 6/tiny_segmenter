@@ -16,4 +16,8 @@ describe TinySegmenter do
   it "tokenizes interspersed non-Japanese words correctly" do
     subject.segment("TinySegmenterはRubyだけで").should == ["TinySegmenter", "は", "Ruby", "だけ", "で"]
   end
+
+  it "should have a version" do
+    TinySegmenter::VERSION.should_not be_empty
+  end
 end
