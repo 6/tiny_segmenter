@@ -4,7 +4,7 @@ require "tiny_segmenter/segmentation_model"
 
 class TinySegmenter
   WhitespaceOnlyRegex = Regexp.compile("^[　 ]+$")
-  PunctuationRegex = Regexp.compile("^[-.。・（）()［］｛｝{}【】、､,，…‥〽「」『』〜~！!：:？?\"'|_＿]+$")
+  PunctuationRegex = Regexp.compile("^[-–—―.。・（）()［］｛｝{}【】⟨⟩、､,，،…‥〽「」『』〜~！!：:？?\"'|_＿“”‘’;/⁄／«»]+$")
 
   def initialize
     @chartype = []
