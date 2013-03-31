@@ -5,7 +5,7 @@ require 'tiny_segmenter/version'
 Gem::Specification.new do |s|
   s.name = 'tiny_segmenter'
   s.version = TinySegmenter::VERSION
-  s.date = '2012-08-27'
+  s.date = '2013-03-30'
   s.summary = "Ruby port of TinySegmenter.js for tokenizing Japanese text."
   s.description = "Ruby port of TinySegmenter.js for tokenizing Japanese text."
   s.authors = ["Peter Graham"]
