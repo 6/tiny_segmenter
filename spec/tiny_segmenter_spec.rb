@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe TinySegmenter do
-  subject{ TinySegmenter.new }
+  subject{ described_class.new }
 
   describe "#segment" do
     it "tokenizes Japanese text fairly accurately" do
@@ -39,6 +39,6 @@ describe TinySegmenter do
   end
 
   it "has a version" do
-    TinySegmenter::VERSION.should be_kind_of(String)
+    described_class::VERSION.should be_kind_of(String)
   end
 end
