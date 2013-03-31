@@ -15,7 +15,10 @@ describe TinySegmenter do
     end
 
     it "removes full-width space (U+3000) tokens" do
-      subject.segment("すてき！　男性が歌う「夢やぶれて」もいいね。").should_not include ("　")
+      sentence = "すてき！　男性が歌う「夢やぶれて」もいいね。"
+      full_width_space = "　"
+      sentence.should include(full_width_space)
+      subject.segment(sentence).should_not include (full_width_space)
     end
 
     it "tokenizes interspersed non-Japanese words correctly" do
