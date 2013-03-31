@@ -4,6 +4,7 @@ require "tiny_segmenter/segmentation_model"
 
 class TinySegmenter
   WhitespaceOnlyRegex = Regexp.compile("^[　 ]+$")
+  PunctuationRegex = Regexp.compile("^[-.。・（）()［］｛｝{}【】、､,，…‥〽「」『』〜~！!：:？?\"'|_＿]+$")
 
   def initialize
     @chartype = []
@@ -22,7 +23,7 @@ class TinySegmenter
     end
   end
 
-  def segment(text)
+  def segment(text, options = {})
     return []  if text.nil? || text.strip.empty?
     text = text.strip
     result = []
@@ -31,6 +32,7 @@ class TinySegmenter
     text.split(//).each do |char|
       char.strip!
       next  if char.empty? || char.match(WhitespaceOnlyRegex)
+      next  if options[:ignore_punctuation] && char.match(PunctuationRegex)
       segments << char
       ctypes << ctype(char)
     end

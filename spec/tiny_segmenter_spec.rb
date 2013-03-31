@@ -24,6 +24,18 @@ describe TinySegmenter do
     it "tokenizes interspersed non-Japanese words correctly" do
       subject.segment("TinySegmenterはRubyだけで").should == ["TinySegmenter", "は", "Ruby", "だけ", "で"]
     end
+
+    context "with ignore_punctuation option not set" do
+      it "includes punctuation-only tokens" do
+        subject.segment("すてき！?　男性が、歌う「夢やぶれて」もいいね。...").should include("。", "！", "?", "、", "「", "」", "...")
+      end
+    end
+
+    context "with ignore_punctuation option set" do
+      it "removes all punctuation-only tokens" do
+        subject.segment("すてき！?　男性が、歌う「夢やぶれて」もいいね。...", ignore_punctuation: true).should_not include("。", "！", "?", "、", "「", "」", "...")
+      end
+    end
   end
 
   it "has a version" do
