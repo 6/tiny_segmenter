@@ -14,6 +14,10 @@ describe TinySegmenter do
       subject.segment("書かれた 極めて    コンパクト").should_not include("", " ", nil)
     end
 
+    it "removes full-width space (U+3000) tokens" do
+      subject.segment("すてき！　男性が歌う「夢やぶれて」もいいね。").should_not include ("　")
+    end
+
     it "tokenizes interspersed non-Japanese words correctly" do
       subject.segment("TinySegmenterはRubyだけで").should == ["TinySegmenter", "は", "Ruby", "だけ", "で"]
     end

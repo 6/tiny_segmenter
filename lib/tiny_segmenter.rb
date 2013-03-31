@@ -3,6 +3,8 @@ require "tiny_segmenter/version"
 require "tiny_segmenter/segmentation_model"
 
 class TinySegmenter
+  WhitespaceOnlyRegex = Regexp.compile("^[　 ]+$")
+
   def initialize
     @chartype = []
     @model = SegmentationModel.new
@@ -28,7 +30,7 @@ class TinySegmenter
     ctypes = %w[O O O]
     text.split(//).each do |char|
       char.strip!
-      next  if char.empty?
+      next  if char.empty? || char.match(WhitespaceOnlyRegex)
       segments << char
       ctypes << ctype(char)
     end
