@@ -40,5 +40,6 @@ describe TinySegmenter do
 
   it "has a version" do
     described_class::VERSION.should be_kind_of(String)
+    described_class::VERSION.should_not be_empty
   end
 end
