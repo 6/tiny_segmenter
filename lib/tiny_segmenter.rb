@@ -43,14 +43,20 @@ class TinySegmenter
     p1, p2, p3 = %w[U U U]
     (4..segments.size-4).to_a.each do |i|
       score = @BIAS
-      words = []
-      chars = []
-      (-3..2).to_a.each do |idx|
-        words << segments[i + idx]
-        chars << ctypes[i + idx]
-      end
+      w1 = segments[i - 3]
+      w2 = segments[i - 2]
+      w3 = segments[i - 1]
+      w4 = segments[i]
+      w5 = segments[i + 1]
+      w6 = segments[i + 2]
+      c1 = ctypes[i - 3]
+      c2 = ctypes[i - 2]
+      c3 = ctypes[i - 1]
+      c4 = ctypes[i]
+      c5 = ctypes[i + 1]
+      c6 = ctypes[i + 2]
 
-      score += sum_scores(p1, p2, p3, *words, *chars)
+      score += sum_scores(p1, p2, p3, w1, w2, w3, w4, w5, w6, c1, c2, c3, c4, c5, c6)
       p_new = "O"
       if score > 0
         result << word
@@ -75,23 +81,48 @@ class TinySegmenter
 
   def sum_scores(p1, p2, p3, w1, w2, w3, w4, w5, w6, c1, c2, c3, c4, c5, c6)
     score = 0
-    [
-      [:UP1, p1], [:UP2, p2], [:UP3, p3],
-      [:BP1, p1, p2], [:BP2, p2, p3],
-      [:UW1, w1], [:UW2, w2], [:UW3, w3], [:UW4, w4], [:UW5, w5], [:UW6, w6],
-      [:BW1, w2, w3], [:BW2, w3, w4], [:BW3, w4, w5],
-      [:TW1, w1, w2, w3], [:TW2, w2, w3, w4], [:TW3, w3, w4, w5], [:TW4, w4, w5, w6],
-      [:UC1, c1], [:UC2, c2], [:UC3, c3], [:UC4, c4], [:UC5, c5], [:UC6, c6],
-      [:BC1, c2, c3], [:BC2, c3, c4], [:BC3, c4, c5],
-      [:TC1, c1, c2, c3], [:TC2, c2, c3, c4], [:TC3, c3, c4, c5], [:TC4, c4, c5, c6],
-      [:UQ1, p1, c1], [:UQ2, p2, c2], [:UQ3, p3, c3],
-      [:BQ1, p2, c2, c3], [:BQ2, p2, c3, c4], [:BQ3, p3, c2, c3], [:BQ4, p3, c3, c4],
-      [:TQ1, p2, c1, c2, c3], [:TQ2, p2, c2, c3, c4], [:TQ3, p3, c1, c2, c3], [:TQ4, p3, c2, c3, c4],
-    ].each do |category_and_pattern|
-      category = category_and_pattern[0]
-      pattern = category_and_pattern[1..-1].join("")
-      score += @model.score(category, pattern)
-    end
+    score += @model.score(:UP1, p1)
+    score += @model.score(:UP2, p2)
+    score += @model.score(:UP3, p3)
+    score += @model.score(:BP1, p1 + p2)
+    score += @model.score(:BP2, p2 + p3)
+    score += @model.score(:UW1, w1)
+    score += @model.score(:UW2, w2)
+    score += @model.score(:UW3, w3)
+    score += @model.score(:UW4, w4)
+    score += @model.score(:UW5, w5)
+    score += @model.score(:UW6, w6)
+    score += @model.score(:BW1, w2 + w3)
+    score += @model.score(:BW2, w3 + w4)
+    score += @model.score(:BW3, w4 + w5)
+    score += @model.score(:TW1, w1 + w2 + w3)
+    score += @model.score(:TW2, w2 + w3 + w4)
+    score += @model.score(:TW3, w3 + w4 + w5)
+    score += @model.score(:TW4, w4 + w5 + w6)
+    score += @model.score(:UC1, c1)
+    score += @model.score(:UC2, c2)
+    score += @model.score(:UC3, c3)
+    score += @model.score(:UC4, c4)
+    score += @model.score(:UC5, c5)
+    score += @model.score(:UC6, c6)
+    score += @model.score(:BC1, c2 + c3)
+    score += @model.score(:BC2, c3 + c4)
+    score += @model.score(:BC3, c4 + c5)
+    score += @model.score(:TC1, c1 + c2 + c3)
+    score += @model.score(:TC2, c2 + c3 + c4)
+    score += @model.score(:TC3, c3 + c4 + c5)
+    score += @model.score(:TC4, c4 + c5 + c6)
+    score += @model.score(:UQ1, p1 + c1)
+    score += @model.score(:UQ2, p2 + c2)
+    score += @model.score(:UQ3, p3 + c3)
+    score += @model.score(:BQ1, p2 + c2 + c3)
+    score += @model.score(:BQ2, p2 + c3 + c4)
+    score += @model.score(:BQ3, p3 + c2 + c3)
+    score += @model.score(:BQ4, p3 + c3 + c4)
+    score += @model.score(:TQ1, p2 + c1 + c2 + c3)
+    score += @model.score(:TQ2, p2 + c2 + c3 + c4)
+    score += @model.score(:TQ3, p3 + c1 + c2 + c3)
+    score += @model.score(:TQ4, p3 + c2 + c3 + c4)
     score
   end
 end
