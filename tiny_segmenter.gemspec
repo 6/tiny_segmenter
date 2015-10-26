@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version = TinySegmenter::VERSION
   s.licenses = ['BSD']
   s.summary = "Ruby port of TinySegmenter.js for tokenizing Japanese text."
-  s.description = "Uses a Naive Bayes model that has been trained using the RWCP corpus and optimized using L1-norm regularization. The resultant model is quite compact, yet has a 95% accuracy rate."
+  s.description = "Ruby port of TinySegmenter.js for tokenizing Japanese text. Uses a Naive Bayes model that has been trained using the RWCP corpus and optimized using L1-norm regularization. The resultant model is quite compact, yet has a 95% accuracy rate."
   s.authors = ["Peter Graham"]
   s.email = ["pete@gigadrill.com"]
   s.files         = `git ls-files`.split("\n")
