@@ -16,5 +16,5 @@ Gem::Specification.new do |s|
   s.homepage = 'http://github.com/6/tiny_segmenter'
 
   s.add_development_dependency "rake"
-  s.add_development_dependency "rspec"
+  s.add_development_dependency "rspec", ">= 3.3.0"
 end
